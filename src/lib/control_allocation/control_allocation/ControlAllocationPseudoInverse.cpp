@@ -51,7 +51,7 @@ ControlAllocationPseudoInverse::setEffectivenessMatrix(
 			update_normalization_scale);
 
 	// in place on the stored copy: no second matrix on the (small work queue) stack
-	_dropped_axes = dropDependentAxes(_effectiveness);
+	_dropped_axes = dropDependentAxes(_effectiveness, _fixed_wing_axis_priority);
 
 	_mix_update_needed = true;
 	_normalization_needs_update = update_normalization_scale;
@@ -193,10 +193,15 @@ ControlAllocationPseudoInverse::allocate()
 }
 
 uint8_t
-ControlAllocationPseudoInverse::dropDependentAxes(matrix::Matrix<float, NUM_AXES, NUM_ACTUATORS> &effectiveness)
+ControlAllocationPseudoInverse::dropDependentAxes(matrix::Matrix<float, NUM_AXES, NUM_ACTUATORS> &effectiveness,
+	bool fixed_wing_axis_priority)
 {
 	// highest priority first
 	static constexpr ControlAxis kPriority[NUM_AXES] = {THRUST_Z, ROLL, PITCH, THRUST_X, THRUST_Y, YAW};
+	// Only DeltaRay prefers attitude moments and forward force over body-Z force.
+	// The *physical* effectiveness matrix remains unchanged.
+	static constexpr ControlAxis kFixedWingPriority[NUM_AXES] = {ROLL, PITCH, YAW, THRUST_X, THRUST_Z, THRUST_Y};
+	const ControlAxis *priority = fixed_wing_axis_priority ? kFixedWingPriority : kPriority;
 
 	// Gram-Schmidt through the Cholesky factor of the Gram matrix of the accepted unit rows:
 	// equivalent to orthogonalizing the rows, without keeping NUM_ACTUATORS-long vectors on the
@@ -207,7 +212,8 @@ ControlAllocationPseudoInverse::dropDependentAxes(matrix::Matrix<float, NUM_AXES
 	int num_accepted = 0;
 	uint8_t dropped = 0;
 
-	for (const ControlAxis axis : kPriority) {
+	for (int priority_index = 0; priority_index < NUM_AXES; ++priority_index) {
+		const ControlAxis axis = priority[priority_index];
 		const float norm_squared = effectiveness.row(axis).norm_squared();
 
 		if (norm_squared < FLT_EPSILON) {

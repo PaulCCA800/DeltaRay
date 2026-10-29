@@ -1,0 +1,170 @@
+solid eagle_flying_wing
+  facet normal 0 -0.0049067123 0.99998796
+    outer loop
+      vertex 0.162 0 0.006
+      vertex -0.148 0 0.006
+      vertex -0.10272816 -0.5095 0.0035
+    endloop
+  endfacet
+  facet normal 0 -0.0049067123 0.99998796
+    outer loop
+      vertex 0.162 0 0.006
+      vertex -0.10272816 -0.5095 0.0035
+      vertex -0.03 -0.5095 0.0035
+    endloop
+  endfacet
+  facet normal 0 -0.0049067123 -0.99998796
+    outer loop
+      vertex 0.162 0 -0.006
+      vertex -0.03 -0.5095 -0.0035
+      vertex -0.10272816 -0.5095 -0.0035
+    endloop
+  endfacet
+  facet normal -0 -0.0049067123 -0.99998796
+    outer loop
+      vertex 0.162 0 -0.006
+      vertex -0.10272816 -0.5095 -0.0035
+      vertex -0.148 0 -0.006
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex 0.162 0 0.006
+      vertex 0.162 0 -0.006
+      vertex -0.148 0 -0.006
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex 0.162 0 0.006
+      vertex -0.148 0 -0.006
+      vertex -0.148 0 0.006
+    endloop
+  endfacet
+  facet normal -0.99607558 -0.088506711 -0
+    outer loop
+      vertex -0.148 0 0.006
+      vertex -0.148 0 -0.006
+      vertex -0.10272816 -0.5095 -0.0035
+    endloop
+  endfacet
+  facet normal -0.99607558 -0.088506711 0
+    outer loop
+      vertex -0.148 0 0.006
+      vertex -0.10272816 -0.5095 -0.0035
+      vertex -0.10272816 -0.5095 0.0035
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex -0.10272816 -0.5095 0.0035
+      vertex -0.10272816 -0.5095 -0.0035
+      vertex -0.03 -0.5095 -0.0035
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex -0.10272816 -0.5095 0.0035
+      vertex -0.03 -0.5095 -0.0035
+      vertex -0.03 -0.5095 0.0035
+    endloop
+  endfacet
+  facet normal 0.93576188 -0.35263254 0
+    outer loop
+      vertex -0.03 -0.5095 0.0035
+      vertex -0.03 -0.5095 -0.0035
+      vertex 0.162 0 -0.006
+    endloop
+  endfacet
+  facet normal 0.93576188 -0.35263254 0
+    outer loop
+      vertex -0.03 -0.5095 0.0035
+      vertex 0.162 0 -0.006
+      vertex 0.162 0 0.006
+    endloop
+  endfacet
+  facet normal -0 -0.0049067123 -0.99998796
+    outer loop
+      vertex 0.162 0 0.006
+      vertex -0.148 0 0.006
+      vertex -0.10272816 0.5095 0.0035
+    endloop
+  endfacet
+  facet normal 0 -0.0049067123 -0.99998796
+    outer loop
+      vertex 0.162 0 0.006
+      vertex -0.10272816 0.5095 0.0035
+      vertex -0.03 0.5095 0.0035
+    endloop
+  endfacet
+  facet normal 0 -0.0049067123 0.99998796
+    outer loop
+      vertex 0.162 0 -0.006
+      vertex -0.03 0.5095 -0.0035
+      vertex -0.10272816 0.5095 -0.0035
+    endloop
+  endfacet
+  facet normal 0 -0.0049067123 0.99998796
+    outer loop
+      vertex 0.162 0 -0.006
+      vertex -0.10272816 0.5095 -0.0035
+      vertex -0.148 0 -0.006
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex 0.162 0 0.006
+      vertex 0.162 0 -0.006
+      vertex -0.148 0 -0.006
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex 0.162 0 0.006
+      vertex -0.148 0 -0.006
+      vertex -0.148 0 0.006
+    endloop
+  endfacet
+  facet normal 0.99607558 -0.088506711 0
+    outer loop
+      vertex -0.148 0 0.006
+      vertex -0.148 0 -0.006
+      vertex -0.10272816 0.5095 -0.0035
+    endloop
+  endfacet
+  facet normal 0.99607558 -0.088506711 0
+    outer loop
+      vertex -0.148 0 0.006
+      vertex -0.10272816 0.5095 -0.0035
+      vertex -0.10272816 0.5095 0.0035
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex -0.10272816 0.5095 0.0035
+      vertex -0.10272816 0.5095 -0.0035
+      vertex -0.03 0.5095 -0.0035
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex -0.10272816 0.5095 0.0035
+      vertex -0.03 0.5095 -0.0035
+      vertex -0.03 0.5095 0.0035
+    endloop
+  endfacet
+  facet normal -0.93576188 -0.35263254 -0
+    outer loop
+      vertex -0.03 0.5095 0.0035
+      vertex -0.03 0.5095 -0.0035
+      vertex 0.162 0 -0.006
+    endloop
+  endfacet
+  facet normal -0.93576188 -0.35263254 0
+    outer loop
+      vertex -0.03 0.5095 0.0035
+      vertex 0.162 0 -0.006
+      vertex 0.162 0 0.006
+    endloop
+  endfacet
+endsolid eagle_flying_wing

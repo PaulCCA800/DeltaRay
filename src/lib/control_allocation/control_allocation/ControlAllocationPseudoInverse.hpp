@@ -58,6 +58,7 @@ public:
 				    const ActuatorVector &actuator_trim, const ActuatorVector &linearization_point, int num_actuators,
 				    bool update_normalization_scale) override;
 	void setMetricAllocation(bool metric_allocation) { _metric_allocation = metric_allocation; }
+	void setFixedWingAxisPriority(bool enabled) { _fixed_wing_axis_priority = enabled; }
 
 	/**
 	 * Zero the rows of axes that are (nearly) dependent on higher-priority axes
@@ -66,13 +67,15 @@ public:
 	 *
 	 * @return bitmask over ControlAxis of the dropped axes
 	 */
-	static uint8_t dropDependentAxes(matrix::Matrix<float, NUM_AXES, NUM_ACTUATORS> &effectiveness);
+	static uint8_t dropDependentAxes(matrix::Matrix<float, NUM_AXES, NUM_ACTUATORS> &effectiveness,
+		bool fixed_wing_axis_priority = false);
 
 protected:
 	matrix::Matrix<float, NUM_ACTUATORS, NUM_AXES> _mix;
 
 	bool _mix_update_needed{false};
 	bool _metric_allocation{false};
+	bool _fixed_wing_axis_priority{false};
 
 	/**
 	 * Recalculate pseudo inverse if required.

@@ -179,6 +179,10 @@ ControlAllocator::update_allocation_method(bool force)
 			switch (method) {
 			case AllocationMethod::PSEUDO_INVERSE:
 				_control_allocation[i] = new ControlAllocationPseudoInverse();
+				if (_effectiveness_source_id == EffectivenessSource::DELTARAY) {
+					static_cast<ControlAllocationPseudoInverse *>(_control_allocation[i])->setMetricAllocation(true);
+					static_cast<ControlAllocationPseudoInverse *>(_control_allocation[i])->setFixedWingAxisPriority(true);
+				}
 				break;
 
 			case AllocationMethod::SEQUENTIAL_DESATURATION:
@@ -242,6 +246,10 @@ ControlAllocator::update_effectiveness_source()
 
 		case EffectivenessSource::MULTIROTOR_WITH_TILT:
 			tmp = new ActuatorEffectivenessMCTilt(this);
+			break;
+
+		case EffectivenessSource::DELTARAY:
+			tmp = new ActuatorEffectivenessDeltaRay(this);
 			break;
 
 		case EffectivenessSource::CUSTOM:
@@ -573,6 +581,13 @@ ControlAllocator::update_effectiveness_matrix_if_needed(EffectivenessUpdateReaso
 			}
 		}
 
+		if (_effectiveness_source_id == EffectivenessSource::DELTARAY) {
+			for (int motor = 0; motor < 2; ++motor) {
+				if (_handled_motor_failure_bitmask & (1u << motor)) {
+					config.effectiveness_matrices[0].setCol(2 + motor, 0.f);
+				}
+			}
+		}
 		for (int i = 0; i < _num_control_allocation; ++i) {
 			_control_allocation[i]->setActuatorMin(minimum[i]);
 			_control_allocation[i]->setActuatorMax(maximum[i]);

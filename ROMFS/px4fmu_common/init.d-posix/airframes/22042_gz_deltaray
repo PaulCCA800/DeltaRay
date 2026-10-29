@@ -1,0 +1,103 @@
+#!/bin/sh
+# @name Gazebo XFly Eagle wingtip EDF nozzles (experimental)
+# @type Flying Wing
+# @class Plane
+
+. ${R}etc/init.d/rc.fw_defaults
+PX4_SIMULATOR=${PX4_SIMULATOR:=gz}
+PX4_GZ_WORLD=${PX4_GZ_WORLD:=default}
+PX4_SIM_MODEL=${PX4_SIM_MODEL:=deltaray}
+param set-default SIM_GZ_EN 1
+
+# Fixed wingtip EDFs, independently deflected rear exhaust nozzles.
+# NO ELEVON CONTROL: only 2 ESCs + 2 nozzle servos; other surfaces fixed.
+# Never assign an elevon, aileron, elevator, flap, or RC passthrough output.
+# Virtual-force pseudoinverse, NOT stock tiltrotor.
+# Example nozzle exit lever arm x=-0.145 m is NOT measured.
+# Wing span = 1.019 m, mass = 0.65 kg.
+# Alpha positive: nozzle jet down, reaction thrust UP.
+# Control system is experimental; cannot assume stock multicopter stability.
+# DeltaRay is a fixed-wing *controller* vehicle. Four outputs remain
+# motor_1, motor_2, nozzle_1, nozzle_2; no elevons are enabled.
+# This uncalibrated SITL has no airspeed sensor. Do not apply these overrides
+# to real hardware without validating sensors and flight control.
+param set-default SYS_HAS_NUM_ASPD 0
+# Do not scale nozzle/differential-EDF torque requests as aerodynamic surfaces.
+param set-default FW_ARSP_SCALE_EN 0
+# Acro mode must use the FW yaw rate loop rather than yaw stick passthrough.
+param set-default FW_ACRO_YAW_EN 1
+
+param set-default CA_AIRFRAME 16
+param set-default CA_METHOD 0
+param set-default CA_R_REV 0
+param set-default CA_FAILURE_MODE 0
+param set-default CA_ROTOR_COUNT 2
+param set-default CA_SV_TL_COUNT 2
+
+# FRD coordinates; Gazebo has y sign reversed (FLU).
+# Non-dimensional force scaling CT=1 used by PX4 pseudoinverse.
+param set-default CA_ROTOR0_PX -0.145
+param set-default CA_ROTOR0_PY -0.478
+param set-default CA_ROTOR0_PZ 0
+param set-default CA_ROTOR0_AX 1
+param set-default CA_ROTOR0_AY 0
+param set-default CA_ROTOR0_AZ 0
+param set-default CA_ROTOR0_CT 1
+param set-default CA_ROTOR0_KM 0
+param set-default CA_ROTOR0_TILT 1
+
+param set-default CA_ROTOR1_PX -0.145
+param set-default CA_ROTOR1_PY 0.478
+param set-default CA_ROTOR1_PZ 0
+param set-default CA_ROTOR1_AX 1
+param set-default CA_ROTOR1_AY 0
+param set-default CA_ROTOR1_AZ 0
+param set-default CA_ROTOR1_CT 1
+param set-default CA_ROTOR1_KM 0
+param set-default CA_ROTOR1_TILT 2
+
+# The production nozzle articulation angle is unknown. +/-30 deg is an
+# experimental bound, not a verified physical specification.
+# alpha > 0: exhaust DOWN (FRD +Z), reaction thrust UP (FRD -Z).
+param set-default CA_SV_TL0_MINA -30
+param set-default CA_SV_TL0_MAXA 30
+param set-default CA_SV_TL0_TD 0
+param set-default CA_SV_TL0_CT 0
+param set-default CA_SV_TL1_MINA -30
+param set-default CA_SV_TL1_MAXA 30
+param set-default CA_SV_TL1_TD 0
+param set-default CA_SV_TL1_CT 0
+
+# Gazebo actuator bridging: two ESC channels and two servo channels.
+param set-default SIM_GZ_EC_FUNC1 101
+param set-default SIM_GZ_EC_FUNC2 102
+param set-default SIM_GZ_EC_MIN1 0
+param set-default SIM_GZ_EC_MIN2 0
+param set-default SIM_GZ_EC_MAX1 1000
+param set-default SIM_GZ_EC_MAX2 1000
+param set-default SIM_GZ_SV_FUNC1 201
+param set-default SIM_GZ_SV_FUNC2 202
+# Extra simulated servo outputs are explicitly disabled (0 = Disabled).
+# Servo 1 and 2 are NOZZLES; servos 3-8 must not drive elevons.
+param set-default SIM_GZ_SV_FUNC3 0
+param set-default SIM_GZ_SV_FUNC4 0
+param set-default SIM_GZ_SV_FUNC5 0
+param set-default SIM_GZ_SV_FUNC6 0
+param set-default SIM_GZ_SV_FUNC7 0
+param set-default SIM_GZ_SV_FUNC8 0
+param set-default SIM_GZ_SV_MIN1 -524
+param set-default SIM_GZ_SV_MIN2 -524
+param set-default SIM_GZ_SV_MAX1 524
+param set-default SIM_GZ_SV_MAX2 524
+# Invert servo angle for GZ FLU (+Y left,+Z up) versus PX4 FRD (+Y right,+Z down).
+param set-default SIM_GZ_SV_REV 3
+
+# Rates are limited INSIDE allocator in physical angle/thrust space.
+# Disable upstream PWM-style normalized output slew to avoid double limitation.
+param set-default CA_R0_SLEW 0
+param set-default CA_R1_SLEW 0
+param set-default CA_SV0_SLEW 0
+param set-default CA_SV1_SLEW 0
+# Hover throttle is not a calibrated fixed-wing configuration.
+# Four virtual inputs cannot independently produce full six-axis wrench.
+param set-default COM_DISARM_LAND 0

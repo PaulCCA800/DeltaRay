@@ -1,0 +1,402 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <model name="deltaray">
+    <pose>0 0 0.30 0 0 0</pose>
+    <static>false</static>
+    <self_collide>false</self_collide>
+    <link name="base_link">
+      <inertial>
+        <mass>0.6</mass>
+        <inertia>
+          <ixx>0.054</ixx>
+          <iyy>0.013</iyy>
+          <izz>0.065</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="wing_mesh">
+        <geometry>
+          <mesh>
+            <uri>model://deltaray/meshes/eagle_wing.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.1 0.75 0.18 1</diffuse>
+        </material>
+      </visual>
+      <collision name="wing_collision">
+        <geometry>
+          <mesh>
+            <uri>model://deltaray/meshes/eagle_wing.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="fuselage">
+        <geometry>
+          <box>
+            <size>0.383 0.085 0.055</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.95 0.95 0.95 1</diffuse>
+        </material>
+      </visual>
+      <sensor name="imu_sensor" type="imu">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>true</always_on>
+        <update_rate>250</update_rate>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00686</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+      <sensor name="navsat_sensor" type="navsat">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>true</always_on>
+        <update_rate>30</update_rate>
+      </sensor>
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <x>
+            <noise type="gaussian">
+              <mean>0</mean>
+              <stddev>3e-07</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <mean>0</mean>
+              <stddev>3e-07</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <mean>0</mean>
+              <stddev>3e-07</stddev>
+            </noise>
+          </z>
+        </magnetometer>
+      </sensor>
+      <sensor name="air_pressure_sensor" type="air_pressure">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>true</always_on>
+        <update_rate>50</update_rate>
+        <air_pressure>
+          <pressure>
+            <noise type="gaussian">
+              <mean>0</mean>
+              <stddev>3.0</stddev>
+            </noise>
+          </pressure>
+        </air_pressure>
+      </sensor>
+      <visual name="fixed_edf_duct_0">
+        <pose>-0.067 0.478 0 0 1.5707963268 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.025</radius>
+            <length>0.082</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>0.91 0.91 0.91 1</diffuse>
+        </material>
+      </visual>
+      <visual name="fixed_edf_ring_0">
+        <pose>-0.028 0.478 0 0 1.5707963268 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.028</radius>
+            <length>0.009</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>0.17 0.17 0.17 1</diffuse>
+        </material>
+      </visual>
+      <visual name="fixed_edf_duct_1">
+        <pose>-0.067 -0.478 0 0 1.5707963268 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.025</radius>
+            <length>0.082</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>0.91 0.91 0.91 1</diffuse>
+        </material>
+      </visual>
+      <visual name="fixed_edf_ring_1">
+        <pose>-0.028 -0.478 0 0 1.5707963268 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.028</radius>
+            <length>0.009</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>0.17 0.17 0.17 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="nozzle_0">
+      <pose>-0.11 0.478 0 0 1.5707963268 0</pose>
+      <inertial>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>2e-05</ixx>
+          <iyy>2e-05</iyy>
+          <izz>2e-05</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="nozzle_cone_0">
+        <pose>0 0 -0.020 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.022</radius>
+            <length>0.053</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>0.1 0.7 0.12 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <joint name="nozzle_pitch_0" type="revolute">
+      <parent>base_link</parent>
+      <child>nozzle_0</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-0.5235987755982988</lower>
+          <upper>0.5235987755982988</upper>
+          <effort>5</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.08</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="thrust_proxy_0">
+      <pose>-0.145 0.478 0 0 1.5707963268 0</pose>
+      <inertial>
+        <mass>0.005</mass>
+        <inertia>
+          <ixx>1e-05</ixx>
+          <iyy>1e-05</iyy>
+          <izz>1e-05</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+    </link>
+    <joint name="thrust_proxy_joint_0" type="revolute">
+      <parent>nozzle_0</parent>
+      <child>thrust_proxy_0</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1000000</lower>
+          <upper>1000000</upper>
+        </limit>
+      </axis>
+    </joint>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>nozzle_pitch_0</joint_name>
+      <sub_topic>servo_0</sub_topic>
+      <p_gain>40</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>2</d_gain>
+      <cmd_max>5</cmd_max>
+      <cmd_min>-5</cmd_min>
+    </plugin>
+    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>thrust_proxy_joint_0</jointName>
+      <linkName>thrust_proxy_0</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.025</timeConstantUp>
+      <timeConstantDown>0.035</timeConstantDown>
+      <maxRotVelocity>1000.0</maxRotVelocity>
+      <motorConstant>5e-06</motorConstant>
+      <momentConstant>0</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>0</motorNumber>
+      <rotorDragCoefficient>0</rotorDragCoefficient>
+      <rollingMomentCoefficient>0</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+    <link name="nozzle_1">
+      <pose>-0.11 -0.478 0 0 1.5707963268 0</pose>
+      <inertial>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>2e-05</ixx>
+          <iyy>2e-05</iyy>
+          <izz>2e-05</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="nozzle_cone_1">
+        <pose>0 0 -0.020 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.022</radius>
+            <length>0.053</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>0.1 0.7 0.12 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <joint name="nozzle_pitch_1" type="revolute">
+      <parent>base_link</parent>
+      <child>nozzle_1</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-0.5235987755982988</lower>
+          <upper>0.5235987755982988</upper>
+          <effort>5</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.08</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="thrust_proxy_1">
+      <pose>-0.145 -0.478 0 0 1.5707963268 0</pose>
+      <inertial>
+        <mass>0.005</mass>
+        <inertia>
+          <ixx>1e-05</ixx>
+          <iyy>1e-05</iyy>
+          <izz>1e-05</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+    </link>
+    <joint name="thrust_proxy_joint_1" type="revolute">
+      <parent>nozzle_1</parent>
+      <child>thrust_proxy_1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1000000</lower>
+          <upper>1000000</upper>
+        </limit>
+      </axis>
+    </joint>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>nozzle_pitch_1</joint_name>
+      <sub_topic>servo_1</sub_topic>
+      <p_gain>40</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>2</d_gain>
+      <cmd_max>5</cmd_max>
+      <cmd_min>-5</cmd_min>
+    </plugin>
+    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>thrust_proxy_joint_1</jointName>
+      <linkName>thrust_proxy_1</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.025</timeConstantUp>
+      <timeConstantDown>0.035</timeConstantDown>
+      <maxRotVelocity>1000.0</maxRotVelocity>
+      <motorConstant>5e-06</motorConstant>
+      <momentConstant>0</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>1</motorNumber>
+      <rotorDragCoefficient>0</rotorDragCoefficient>
+      <rollingMomentCoefficient>0</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+    <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
+      <a0>0</a0>
+      <cla>4.8</cla>
+      <cda>0.6</cda>
+      <cma>0</cma>
+      <alpha_stall>0.34</alpha_stall>
+      <cla_stall>-3.5</cla_stall>
+      <cda_stall>-0.8</cda_stall>
+      <cma_stall>0</cma_stall>
+      <cp>-0.025 0.255 0</cp>
+      <area>0.0975</area>
+      <air_density>1.2041</air_density>
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>base_link</link_name>
+    </plugin>
+    <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
+      <a0>0</a0>
+      <cla>4.8</cla>
+      <cda>0.6</cda>
+      <cma>0</cma>
+      <alpha_stall>0.34</alpha_stall>
+      <cla_stall>-3.5</cla_stall>
+      <cda_stall>-0.8</cda_stall>
+      <cma_stall>0</cma_stall>
+      <cp>-0.025 -0.255 0</cp>
+      <area>0.0975</area>
+      <air_density>1.2041</air_density>
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>base_link</link_name>
+    </plugin>
+  </model>
+</sdf>
